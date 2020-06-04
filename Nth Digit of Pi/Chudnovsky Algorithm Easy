@@ -1,0 +1,26 @@
+from math import factorial        #import the factorial function from math library
+from decimal import Decimal, getcontext       #import the Decimal and getcontext functions from decimal library
+
+getcontext().prec = 10000         #set a new precision 
+
+
+def pi_calc(num):
+    
+    numerator = Decimal(0)        #we use Decimal instead of float for more precision  
+    pi = Decimal(0)
+    denominator = Decimal(0)
+
+    for i in range(num):        #the loop iterates till the required digit of pi
+        
+        numerator = ((-1)**i)*(factorial(6*i))*(13591409+(545140134*i))
+        denominator = (factorial(3*i))*((factorial(i))**3)*(640320**(3*i))
+        pi += Decimal(numerator)/Decimal(denominator)
+    
+    constant = Decimal(426880*(10005**(1/2)))   
+    pi = Decimal(constant/pi)
+    return round(pi,num)        #get the value of pi till the required digit
+
+
+pi_input = input("Enter the number of digit's : ")
+num = int(pi_input)
+print(pi_calc(num))
