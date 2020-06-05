@@ -1,0 +1,17 @@
+from math import factorial
+from decimal import Decimal, getcontext
+
+getcontext().prec = 100000  # set precision
+
+
+def e_till_limit(num):
+    digit = Decimal(0)
+    next_term = Decimal(0)
+    for i in range(0, num):
+        next_term = ((2*i)+2)/(factorial((2*i)+1))  # brothers formula for determination of e
+        digit = Decimal(digit) + Decimal(next_term)
+    return round(digit, num)
+
+
+num = int(input("Enter the decimal digit : "))
+print(e_till_limit(num))
